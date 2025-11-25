@@ -13,8 +13,8 @@ import 'package:impostor_futbol/data/players_mixed.dart';
 
 import '../models/player.dart';
 
-enum GameMode { jugador, club, balonoro }
-enum Difficulty { easy, medium, hard, mixed }
+enum GameMode { jugador, club, balonoro, words }
+enum Difficulty { easy, medium, hard, mixed, all }
 
 class GameController extends ChangeNotifier {
   List<Player> players = [];
@@ -51,10 +51,12 @@ class GameController extends ChangeNotifier {
     switch (mode) {
       case GameMode.jugador:
         return _getPoolForPlayers();
-      case GameMode.club:
+      case GameMode.words:
         return wordsList;
       case GameMode.balonoro:
         return balonOroData;
+      default:
+        return [];
     }
   }
 
@@ -68,6 +70,12 @@ class GameController extends ChangeNotifier {
         return playersHard;
       case Difficulty.mixed:
         return playersMixed;
+      case Difficulty.all:
+        return [
+          ...playersEasy,
+          ...playersMedium,
+          ...playersHard,
+        ];
     }
   }
 

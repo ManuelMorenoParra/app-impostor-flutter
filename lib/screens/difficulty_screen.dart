@@ -20,6 +20,8 @@ class DifficultyScreen extends StatelessWidget {
             _buildButton(context, "Difícil", "hard"),
             const SizedBox(height: 16),
             _buildButton(context, "Libre (mezclado)", "mixed"),
+            const SizedBox(height: 16),
+            _buildButton(context, "Todos ", "all"),
           ],
         ),
       ),

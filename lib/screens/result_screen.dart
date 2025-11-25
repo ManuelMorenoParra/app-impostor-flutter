@@ -10,74 +10,115 @@ class ResultScreen extends StatefulWidget {
 }
 
 class _ResultScreenState extends State<ResultScreen> {
-  bool _showResult = false;
+  bool showSecret = false;
+  bool showImpostor = false;
 
   @override
   Widget build(BuildContext context) {
-    final gc = Provider.of<GameController>(context);
+    final game = context.watch<GameController>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Resultado / Fin de ronda')),
+      backgroundColor: const Color(0xFF111111),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const Text("Resultado final"),
+        centerTitle: true,
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(24),
         child: Column(
           children: [
-            ElevatedButton(
-              onPressed: () {
-                setState(() => _showResult = !_showResult);
-              },
-              child: Text(_showResult ? 'Ocultar resultado' : 'Mostrar resultado'),
+            //
+            // SECRET
+            //
+            Card(
+              color: Colors.grey[900],
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    const Text(
+                      "Secreto de la ronda",
+                      style: TextStyle(color: Colors.white70, fontSize: 18),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      showSecret ? game.secret : "Oculto",
+                      style: TextStyle(
+                        color: showSecret ? Colors.greenAccent : Colors.white30,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: () =>
+                          setState(() => showSecret = !showSecret),
+                      child: Text(showSecret ? "Ocultar" : "Revelar"),
+                    )
+                  ],
+                ),
+              ),
             ),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 30),
 
-            // Animación de mostrar/ocultar
-            AnimatedCrossFade(
-              duration: const Duration(milliseconds: 300),
-              crossFadeState: _showResult
-                  ? CrossFadeState.showFirst
-                  : CrossFadeState.showSecond,
-              firstChild: Column(
-                children: [
-                  Text('Secreto de la ronda:',
-                      style: Theme.of(context).textTheme.titleMedium),
-                  const SizedBox(height: 8),
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        gc.secret,
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+            //
+            // IMPOSTOR
+            //
+            Card(
+              color: Colors.grey[900],
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    const Text(
+                      "El impostor era",
+                      style: TextStyle(color: Colors.white70, fontSize: 18),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      showImpostor
+                          ? game.players[game.impostorIndex].name
+                          : "Oculto",
+                      style: TextStyle(
+                        color:
+                            showImpostor ? Colors.redAccent : Colors.white30,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  Text('Impostor:', style: Theme.of(context).textTheme.titleMedium),
-                  const SizedBox(height: 8),
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        gc.players[gc.impostorIndex].name,
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                    ),
-                  ),
-                ],
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: () =>
+                          setState(() => showImpostor = !showImpostor),
+                      child: Text(showImpostor ? "Ocultar" : "Revelar"),
+                    )
+                  ],
+                ),
               ),
-              secondChild: Container(), // vacío cuando oculto
             ),
 
             const Spacer(),
 
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.greenAccent[700],
+                minimumSize: const Size(double.infinity, 55),
+              ),
               onPressed: () {
-                gc.reset();
-                Navigator.popUntil(context, (route) => route.isFirst);
+                game.reset();
+                Navigator.popUntil(context, (r) => r.isFirst);
               },
-              child: const Text('Reiniciar partida'),
-            ),
+              child: const Text(
+                "Nueva partida",
+                style: TextStyle(color: Colors.black),
+              ),
+            )
           ],
         ),
       ),

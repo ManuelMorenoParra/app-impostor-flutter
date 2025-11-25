@@ -1,30 +1,25 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:flutter_impostor/main.dart';
+// Asegúrate de importar correctamente tu archivo main.dart
+import 'package:impostor_futbol/main.dart'; // Cambié de 'MyApp' a 'ImpostorFutbolApp'
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Smoke test: Counter increments', (WidgetTester tester) async {
+    // Construir la aplicación y disparar un frame.
+    await tester.pumpWidget(const ImpostorFutbolApp());
 
-    // Verify that our counter starts at 0.
+    // Verificar que el contador comience en 0.
+    // Aquí, asumimos que el contador se muestra con el texto '0' inicialmente.
     expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text('1'), findsNothing); // No debería haber un 1 al principio.
 
-    // Tap the '+' icon and trigger a frame.
+    // Tocar el ícono de '+' (esto puede depender de cómo hayas definido el ícono en tu app)
     await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    await tester.pump(); // Esperamos que la UI se actualice después de la acción.
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verificar que el contador se haya incrementado a 1.
+    expect(find.text('0'), findsNothing); // Ahora no debe haber un 0.
+    expect(find.text('1'), findsOneWidget); // Debería haber un 1 después de la acción.
   });
 }

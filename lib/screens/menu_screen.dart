@@ -44,10 +44,10 @@ class MenuScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 _ModeCard(
-                  title: "Club",
+                  title: "Palabras",
                   icon: Icons.shield,
-                  selected: game.mode == GameMode.club,
-                  onTap: () => game.setMode(GameMode.club),
+                  selected: game.mode == GameMode.words,
+                  onTap: () => game.setMode(GameMode.words),
                 ),
                 const SizedBox(width: 10),
                 _ModeCard(
@@ -93,6 +93,11 @@ class MenuScreen extends StatelessWidget {
                     label: "Mixto",
                     selected: game.difficulty == Difficulty.mixed,
                     onTap: () => game.setDifficulty(Difficulty.mixed),
+                  ),
+                  _DifficultyButton(
+                    label: "Todos",
+                    selected: game.difficulty == Difficulty.all,
+                    onTap: () => game.setDifficulty(Difficulty.all),
                   ),
                 ],
               ),

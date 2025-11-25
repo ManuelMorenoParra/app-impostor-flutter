@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart'; // Asegúrate de importar provider si lo usas
+
 import 'controllers/game_controller.dart';
-import 'screens/register_screen.dart';
+import 'screens/register_screen.dart'; // Si usas otras pantallas, importa sus archivos
 
 void main() {
   runApp(const ImpostorFutbolApp());

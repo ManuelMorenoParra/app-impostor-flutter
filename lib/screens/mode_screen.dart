@@ -42,7 +42,7 @@ class ModeScreen extends StatelessWidget {
                 gc.assignRoles();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const RevealScreen()),
+                  MaterialPageRoute(builder: (_) => const RevealScreen(playerIndex: 0)),
                 );
               },
               child: const Text('Comenzar partida'),
