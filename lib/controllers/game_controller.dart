@@ -111,10 +111,10 @@ class GameController extends ChangeNotifier {
   // ------------------------------
   // RESET
   // ------------------------------
-  void reset() {
+  void resetGame() {
     secret = '';
     impostorIndex = -1;
-    players = [];
+    // players se mantiene
     notifyListeners();
   }
 }

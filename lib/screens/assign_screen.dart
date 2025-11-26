@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:impostor_futbol/screens/result_screen.dart';
 import 'package:provider/provider.dart';
 import '../controllers/game_controller.dart';
 import 'reveal_screen.dart';
@@ -46,7 +47,15 @@ class AssignScreen extends StatelessWidget {
                 },
               ),
             ),
-            ElevatedButton(onPressed: () => Navigator.pushNamed(context, '/result'), child: const Text('Ir al resultado')),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const ResultScreen()),
+                );
+              },
+              child: const Text('Ir al resultado'),
+            )
           ],
         ),
       ),

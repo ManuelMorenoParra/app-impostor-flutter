@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:impostor_futbol/screens/mode_screen.dart';
+import 'package:impostor_futbol/screens/register_screen.dart';
 import 'package:provider/provider.dart';
 import '../controllers/game_controller.dart';
 
@@ -58,8 +60,20 @@ class _ResultScreenState extends State<ResultScreen> {
               ),
             ),
             const Spacer(),
-            ElevatedButton(onPressed: () { gc.reset(); Navigator.popUntil(context, (r) => r.isFirst); }, child: const Text('Nueva partida')),
-          ],
+            ElevatedButton(
+              onPressed: () {
+                // Solo reinicia el juego, pero mantiene los jugadores
+                final gc = Provider.of<GameController>(context, listen: false);
+                gc.resetGame(); // ← Creamos un método que solo reinicie roles, no jugadores
+
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (_) => const ModeScreen()),
+                );
+              },
+              child: const Text('Nueva partida'),
+            )
+          ],    
         ),
       ),
     );
