@@ -11,11 +11,16 @@ class ModeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final gc = Provider.of<GameController>(context);
 
+    /// INICIA EL JUEGO → Asigna roles y comienza por el jugador 0
     void startGame() {
       gc.assignRoles();
+
+      /// Revelación SIEMPRE debe empezar en el 0
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => const RevealScreen()),
+        MaterialPageRoute(
+          builder: (_) => const RevealScreen(playerIndex: 0),
+        ),
       );
     }
 
@@ -25,6 +30,9 @@ class ModeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            // --------------------
+            //   MODO JUGADOR
+            // --------------------
             ListTile(
               title: const Text('Jugador'),
               subtitle: const Text('Todos ven el mismo jugador excepto el impostor'),
@@ -32,6 +40,10 @@ class ModeScreen extends StatelessWidget {
               selected: gc.mode == GameMode.jugador,
               onTap: () => gc.setMode(GameMode.jugador),
             ),
+
+            // --------------------
+            //   MODO PALABRAS
+            // --------------------
             ListTile(
               title: const Text('Palabras'),
               subtitle: const Text('Modo palabras aleatorias'),
@@ -39,6 +51,10 @@ class ModeScreen extends StatelessWidget {
               selected: gc.mode == GameMode.words,
               onTap: () => gc.setMode(GameMode.words),
             ),
+
+            // --------------------
+            //   MODO BALÓN DE ORO
+            // --------------------
             ListTile(
               title: const Text('Balón de Oro'),
               subtitle: const Text('Año del Balón de Oro'),
@@ -46,25 +62,30 @@ class ModeScreen extends StatelessWidget {
               selected: gc.mode == GameMode.balonoro,
               onTap: () => gc.setMode(GameMode.balonoro),
             ),
+
             const Spacer(),
+
+            // --------------------
+            //     BOTÓN COMENZAR
+            // --------------------
             ElevatedButton(
               onPressed: () {
                 if (gc.mode == GameMode.jugador) {
-                  // PRIMERO pedir dificultad
+                  // Primero elegir dificultad
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (_) => DifficultyScreen(
                         onSelect: (difficulty) {
-                          gc.setDifficulty(difficulty);    // ← Guarda dificultad
-                          Navigator.pop(context);          // Vuelve al ModeScreen
-                          startGame();                     // Luego inicia partida
+                          gc.setDifficulty(difficulty);
+                          Navigator.pop(context); // vuelve al menú
+                          startGame(); // inicia juego
                         },
                       ),
                     ),
                   );
                 } else {
-                  // Otros modos no necesitan dificultad
+                  // Otros modos no requieren dificultad
                   startGame();
                 }
               },
