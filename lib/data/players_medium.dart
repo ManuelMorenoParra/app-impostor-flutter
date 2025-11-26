@@ -10,7 +10,6 @@ const List<String> playersMedium = [
   'Ángel Di María',
   'Paulo Dybala',
   'Frenkie de Jong',
-  'Pedri',
   'Gavi',
   'Federico Valverde',
   'Eduardo Camavinga',
@@ -28,5 +27,9 @@ const List<String> playersMedium = [
   'Raphaël Varane',
   'Thibaut Courtois',
   'Ederson Moraes',
-  'Marquinhos'
+  'Marquinhos',
+  'Rafael Leão',
+  'Vinícius Jr',
+  'Rodri',
+  'João Cancelo'
 ];

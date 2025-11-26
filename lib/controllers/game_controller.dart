@@ -105,7 +105,7 @@ class GameController extends ChangeNotifier {
       return "❌ ¡Eres el IMPOSITOR!\nTu objetivo: confundir sin que te pillen gilipollas.";
     }
 
-    return "La palabra/jugador/clúb común es:\n\n$secret";
+    return "La palabra/jugador/balon de oro en común es:\n\n$secret";
   }
 
   // ------------------------------

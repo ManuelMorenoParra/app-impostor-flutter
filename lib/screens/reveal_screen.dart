@@ -39,7 +39,7 @@ class _RevealScreenState extends State<RevealScreen> {
     final revealText = gc.revealForIndex(_currentIndex);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Turno: $playerName')),
+      appBar: AppBar(title: const Text('Juego')),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -50,9 +50,7 @@ class _RevealScreenState extends State<RevealScreen> {
                 onPressed: _toggleReveal,
                 child: Text(_revealed ? 'Ocultar' : 'Revelar'),
               ),
-
               const SizedBox(height: 20),
-
               AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeOut,
@@ -67,45 +65,58 @@ class _RevealScreenState extends State<RevealScreen> {
                     )
                   ],
                 ),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 160,
-                  child: Center(
-                    child: _revealed
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                revealText,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(height: 8),
-                              if (gc.impostorIndex == _currentIndex)
-                                const Text(
-                                  '¡Eres el impostor, manténlo secreto!',
-                                  style: TextStyle(
-                                    fontStyle: FontStyle.italic,
-                                    color: Colors.red,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Turno del jugador en grande
+                    Text(
+                      'Turno: $playerName',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    // Contenido revelado o candado
+                    SizedBox(
+                      width: double.infinity,
+                      height: 160,
+                      child: Center(
+                        child: _revealed
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    revealText,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                ),
-                            ],
-                          )
-                        : const Icon(Icons.lock, size: 64),
-                  ),
+                                  const SizedBox(height: 8),
+                                  if (gc.impostorIndex == _currentIndex)
+                                    const Text(
+                                      '¡Eres el impostor, manténlo secreto!',
+                                      style: TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                ],
+                              )
+                            : const Icon(Icons.lock, size: 64),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-
               const SizedBox(height: 24),
-
               ElevatedButton(
                 onPressed: () => _next(gc),
                 child: const Text('Siguiente jugador'),
               ),
-
               const SizedBox(height: 12),
-
               Text(
                 'Jugador ${_currentIndex + 1} de ${gc.players.length}',
                 style: const TextStyle(fontSize: 16),
