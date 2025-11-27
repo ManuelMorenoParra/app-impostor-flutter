@@ -55,8 +55,6 @@ class AssignScreen extends StatelessWidget {
                 },
               ),
             ),
-
-            // ❌ Botón eliminado: ya NO debe existir
           ],
         ),
       ),

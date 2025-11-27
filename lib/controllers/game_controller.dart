@@ -12,6 +12,7 @@ import 'package:impostor_futbol/data/players_hard.dart';
 
 // CLUBES
 import 'package:impostor_futbol/data/clubs_mode.dart';
+import 'package:impostor_futbol/data/selecciones_list.dart';
 
 import '../models/player.dart';
 
@@ -61,7 +62,10 @@ class GameController extends ChangeNotifier {
         return balonOroData;
 
       case GameMode.club:
-        return clubsMode; // ← MODO CLUBES
+        return clubsMode;
+
+      case GameMode.seleccion:
+        return seleccionList;
 
       default:
         return [];

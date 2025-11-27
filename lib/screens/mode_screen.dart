@@ -23,7 +23,7 @@ class ModeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(18),
         child: Column(
           children: [
-            _optionTile(context, 'Jugador', 'Todos ven el mismo jugador excepto el impostor', Icons.person, gc.mode == GameMode.jugador, () => gc.setMode(GameMode.jugador)),
+            _optionTile(context, 'Jugador', 'Adivinar al jugador', Icons.person, gc.mode == GameMode.jugador, () => gc.setMode(GameMode.jugador)),
             const SizedBox(height: 10),
             _optionTile(context, 'Palabras', 'Modo palabras aleatorias', Icons.shield, gc.mode == GameMode.words, () => gc.setMode(GameMode.words)),
             const SizedBox(height: 10),
