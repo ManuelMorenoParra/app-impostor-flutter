@@ -27,11 +27,11 @@ class _RulesScreenState extends State<RulesScreen> {
           child: ListView(
             children: [
               _card('Preparación', 'Introduce los nombres. Mínimo 3 jugadores. Se asigna un impostor al azar.'),
-              _card('Revelación', 'Cada jugador, por turno, revela su rol (revelar/ocultar). No mires el teléfono del vecino.'),
+              _card('Revelación', 'Cada jugador, por turno, revela su rol (revelar/ocultar). No mires el teléfono del otro.'),
               _card('Debate', 'Tras la ronda se debate y se vota al sospechoso.'),
-              _card('Objetivo', 'Los no-impostores descubren la palabra; el impostor intenta adivinarla.'),
+              _card('Objetivo', 'Los no-impostores saben la palabra; el impostor intenta engañar.'),
               const SizedBox(height: 20),
-              Center(child: Text('¡Diviértete mariconazo!', style: TextStyle(color: purple, fontSize: 20, fontWeight: FontWeight.bold))),
+              Center(child: Text('¡Diviértete!', style: TextStyle(color: purple, fontSize: 20, fontWeight: FontWeight.bold))),
             ],
           ),
         ),

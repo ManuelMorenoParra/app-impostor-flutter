@@ -48,25 +48,20 @@ class GameController extends ChangeNotifier {
   }
 
   // ------------------------------
-  // POOL SEGÚN MODO + DIFICULTAD
+  // SELECT POOL
   // ------------------------------
   List<String> _getPool() {
     switch (mode) {
       case GameMode.jugador:
         return _getPlayerPool();
-
       case GameMode.words:
         return wordsList;
-
       case GameMode.balonoro:
         return balonOroData;
-
       case GameMode.club:
         return clubsMode;
-
       case GameMode.seleccion:
         return seleccionList;
-
       default:
         return [];
     }
@@ -76,13 +71,10 @@ class GameController extends ChangeNotifier {
     switch (difficulty) {
       case Difficulty.easy:
         return playersEasy;
-
       case Difficulty.medium:
         return playersMedium;
-
       case Difficulty.hard:
         return playersHard;
-
       case Difficulty.all:
         return [
           ...playersEasy,
@@ -93,17 +85,22 @@ class GameController extends ChangeNotifier {
   }
 
   // ------------------------------
-  // ASIGNAR ROLES
+  // ASSIGN ROLES
   // ------------------------------
   void assignRoles() {
-    if (players.isEmpty) return;
+    if (players.isEmpty) {
+      secret = "No hay jugadores";
+      impostorIndex = -1;
+      notifyListeners();
+      return;
+    }
 
     impostorIndex = _rng.nextInt(players.length);
 
     final pool = _getPool();
 
     if (pool.isEmpty) {
-      secret = "ERROR: la base de datos está vacía";
+      secret = "La base de datos está vacía";
     } else {
       secret = pool[_rng.nextInt(pool.length)];
     }
@@ -112,9 +109,11 @@ class GameController extends ChangeNotifier {
   }
 
   // ------------------------------
-  // REVELAR
+  // REVEAL
   // ------------------------------
   String revealForIndex(int index) {
+    if (impostorIndex < 0) return "Ronda no iniciada";
+
     if (index == impostorIndex) {
       return "❌ ¡Eres el IMPOSTOR!";
     }
@@ -123,11 +122,9 @@ class GameController extends ChangeNotifier {
   }
 
   // ------------------------------
-  // RESET
+  // RESET GAME (FIXED)
   // ------------------------------
   void resetGame() {
-    secret = '';
-    impostorIndex = -1;
-    notifyListeners();
+    assignRoles(); // ← GENERA NUEVO IMPOSTOR Y NUEVO SECRETO
   }
 }

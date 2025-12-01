@@ -15,7 +15,6 @@ class ModeScreen extends StatelessWidget {
     void startGame() {
       gc.assignRoles();
 
-      // ❗ REEMPLAZA ModeScreen para evitar volver atrás y recargar
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(

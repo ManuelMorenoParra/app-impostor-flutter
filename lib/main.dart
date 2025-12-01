@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:impostor_futbol/controllers/language_controller.dart';
 import 'package:provider/provider.dart';
 import 'controllers/game_controller.dart';
-import 'controllers/theme_controller.dart';
 import 'screens/main_menu.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+    WidgetsFlutterBinding.ensureInitialized();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ThemeController()),
         ChangeNotifierProvider(create: (_) => GameController()),
         ChangeNotifierProvider(create: (_) => LanguageController()),
       ],
@@ -29,7 +31,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Provider.of<ThemeController>(context);
 
     final base = ThemeData(
       brightness: Brightness.dark,
@@ -62,7 +63,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Impostor Fútbol',
-      themeMode: theme.themeMode,
       theme: base,
       darkTheme: base,
       home: const MainMenu(),

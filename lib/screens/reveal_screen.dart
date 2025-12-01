@@ -30,9 +30,7 @@ class _RevealFlowScreenState extends State<RevealFlowScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // -------------------------
               // NOMBRE DEL JUGADOR
-              // -------------------------
               Text(
                 "Jugador ${index + 1}/${gc.players.length}",
                 style: const TextStyle(color: Colors.white54, fontSize: 18),
@@ -49,9 +47,7 @@ class _RevealFlowScreenState extends State<RevealFlowScreen> {
               ),
               const SizedBox(height: 35),
 
-              // -------------------------
               // TARJETA REVELADA / OCULTA
-              // -------------------------
               AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 padding: const EdgeInsets.all(26),
@@ -98,7 +94,7 @@ class _RevealFlowScreenState extends State<RevealFlowScreen> {
                         )
                       : Icon(
                           Icons.lock,
-                          key: ValueKey("hidden_$index"), // ✔ key única por jugador
+                          key: ValueKey("hidden_$index"),
                           size: 80,
                           color: Colors.white30,
                         ),
@@ -107,9 +103,7 @@ class _RevealFlowScreenState extends State<RevealFlowScreen> {
 
               const SizedBox(height: 40),
 
-              // -------------------------
               // BOTÓN
-              // -------------------------
               SizedBox(
                 width: double.infinity,
                 height: 55,
