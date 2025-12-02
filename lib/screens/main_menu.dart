@@ -60,7 +60,7 @@ class _MainMenuState extends State<MainMenu> with SingleTickerProviderStateMixin
                   duration: const Duration(milliseconds: 500),
                   opacity: _titleOpacity,
                   child: const Text(
-                    'IMPOSTOR FÚTBOL',
+                    'IMPOSTOR',
                     style: TextStyle(color: Colors.white, fontSize: 34, fontWeight: FontWeight.bold, letterSpacing: 4),
                   ),
                 ),

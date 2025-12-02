@@ -69,7 +69,7 @@ class _RevealFlowScreenState extends State<RevealFlowScreen> {
                   duration: const Duration(milliseconds: 400),
                   child: revealed
                       ? Column(
-                          key: ValueKey("revealed_$index"), // ✔ key única por jugador
+                          key: ValueKey("revealed_$index"),
                           children: [
                             Text(
                               text,
@@ -103,49 +103,77 @@ class _RevealFlowScreenState extends State<RevealFlowScreen> {
 
               const SizedBox(height: 40),
 
-              // BOTÓN
-              SizedBox(
-                width: double.infinity,
-                height: 55,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: purple,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                  ),
-                  onPressed: () {
-                    // Mostrar rol
-                    if (!revealed) {
-                      setState(() => revealed = true);
-                      return;
-                    }
-
-                    // Siguiente jugador
-                    if (index + 1 >= gc.players.length) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const ResultScreen(),
+              Row(
+                children: [
+                  // BOTÓN IZQUIERDO — REVELAR / OCULTAR
+                  Expanded(
+                    child: SizedBox(
+                      height: 55,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: purple.withOpacity(0.5),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14),
+                          ),
                         ),
-                      );
-                    } else {
-                      setState(() {
-                        index++;
-                        revealed = false;
-                      });
-                    }
-                  },
-                  child: Text(
-                    revealed ? "Siguiente jugador" : "Revelar",
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                        onPressed: () {
+                          setState(() => revealed = !revealed);
+                        },
+                        child: Text(
+                          revealed ? "Ocultar" : "Revelar",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
+
+                  const SizedBox(width: 15),
+
+                  // BOTÓN DERECHO — SIGUIENTE
+                  Expanded(
+                    child: SizedBox(
+                      height: 55,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: purple,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                        ),
+                        onPressed: () {
+                          if (!revealed) return;
+
+                          if (index + 1 >= gc.players.length) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const ResultScreen(),
+                              ),
+                            );
+                          } else {
+                            setState(() {
+                              index++;
+                              revealed = false;
+                            });
+                          }
+                        },
+                        child: const Text(
+                          "Siguiente",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),

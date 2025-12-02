@@ -6,8 +6,8 @@ import 'screens/main_menu.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-    WidgetsFlutterBinding.ensureInitialized();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
   runApp(
     MultiProvider(
@@ -31,7 +31,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final base = ThemeData(
       brightness: Brightness.dark,
       scaffoldBackgroundColor: bg,
@@ -60,16 +59,23 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Impostor Fútbol',
-      theme: base,
-      darkTheme: base,
-      home: const MainMenu(),
-      // rutas rápidas si las usas
-      routes: {
-        '/main': (_) => const MainMenu(),
+    return GestureDetector(
+      onVerticalDragEnd: (details) {
+        if (details.primaryVelocity != null && details.primaryVelocity! < 0) {
+          SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+        }
       },
+
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Impostor de Fútbol',
+        theme: base,
+        darkTheme: base,
+        home: const MainMenu(),
+        routes: {
+          '/main': (_) => const MainMenu(),
+        },
+      ),
     );
   }
 }
