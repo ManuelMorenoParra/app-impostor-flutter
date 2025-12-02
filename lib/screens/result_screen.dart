@@ -15,6 +15,14 @@ class _ResultScreenState extends State<ResultScreen> {
   bool showImpostor = false;
 
   @override
+  void initState() {
+    super.initState();
+    // ✔ Siempre oculto al entrar
+    showSecret = false;
+    showImpostor = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final gc = Provider.of<GameController>(context);
     const purple = Color(0xFF9F5BFF);
@@ -124,9 +132,10 @@ class _ResultScreenState extends State<ResultScreen> {
             Text(
               title,
               style: const TextStyle(
-                  color: Color(0xFFE0DAF5),
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
+                color: Color(0xFFE0DAF5),
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+              ),
             ),
             const SizedBox(height: 10),
 
